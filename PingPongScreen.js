@@ -1,32 +1,33 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, Image } from 'react-native';
 import { Audio }  from 'expo-av'
 import { ballProps, user1Props, user2Props, user, MAX_HEIGHT, MAX_WIDTH} from './components/Props'
 import Ball from './components/ball'
 import User1 from './components/user1'
 import User2 from './components/user2'
 
+const initial = {
+  speed: 7,
+
+  ball: [ballProps.x, ballProps.y],
+  velocityX : 0,
+  velocityY : 0,
+
+  user1: [user1Props.x, user1Props.y],
+  score1: 0,
+
+  user2: [user2Props.x, user2Props.y],
+  score2: 0,
+  
+  direction: 'choose',
+  playWith: 'null',
+  level: 0.1
+}
+
 export default class PingPongScreen extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      nets: [0, 40, 80, 120, 160, 200, 240, 280, 320, 360],
-      speed: 7,
-    
-      ball: [ballProps.x, ballProps.y],
-      velocityX : 0,
-      velocityY : 0,
-    
-      user1: [user1Props.x, user1Props.y],
-      score1: 0,
-    
-      user2: [user2Props.x, user2Props.y],
-      score2: 0,
-      
-      direction: 'choose',
-      playWith: 'null',
-      level: 0.1
-    }
+    this.state = initial
   }
 
   componentDidMount() {
@@ -83,12 +84,12 @@ export default class PingPongScreen extends React.Component {
     let gap
 
     if(direction == 'left') {
-      if(user1[1] < 300 || user1[1] == 0)
+      if(user1[1] < MAX_WIDTH - user.width)
         gap = 30
       else 
         gap = 0
     } else {
-      if(user1[1] > 0 || user1[1] == 300)
+      if(user1[1] > 0)
         gap = -30
       else 
         gap = 0
@@ -102,12 +103,12 @@ export default class PingPongScreen extends React.Component {
     let gap
 
     if(direction == 'left') {
-      if(user2[1] < 300 || user2[1] == 0)
+      if(user2[1]< MAX_WIDTH - user.width)
         gap = 30
       else 
         gap = 0
     } else {
-      if(user2[1] > 0 || user2[1] == 300)
+      if(user2[1] > 0)
         gap = -30
       else 
         gap = 0
@@ -133,12 +134,12 @@ export default class PingPongScreen extends React.Component {
   checkStatus = () => {
     const { ball, score1, score2 } = this.state
     //check out of game area
-    if(ball[0] < -15) {
+    if(ball[0] < -5) {
       this.setState({ score2: score2 + 1})
       //play sound score2
       this.playSoundUserScore()
       this.resetBall()
-    } else if(ball[0] > MAX_HEIGHT + 10) {
+    } else if(ball[0] > MAX_HEIGHT) {
       this.setState({ score1: score1 + 1})
       //play sound score 1
       this.playSoundComScore()
@@ -154,7 +155,7 @@ export default class PingPongScreen extends React.Component {
       this.playSoundWall()
     }
   }
- 
+
   update = () => {
     const { ball, user1, user2, speed, velocityX, velocityY, playWith, level } = this.state
   
@@ -237,15 +238,20 @@ export default class PingPongScreen extends React.Component {
           level: 0.1,
         })
         break
+      case 'go-back':
+        this.setState(initial)
+        break
       default:
         break
     }
   }
 
   render() {
-    const { ball, user1, user2, score1, score2, nets, playWith, direction } = this.state
+    const { ball, user1, user2, score1, score2, playWith, direction } = this.state
+    let nets = [0, 50, 100, 150, 200, 250, 300]
     if(direction == 'play') {
       return (
+        <>
         <View style={styles.container}>
           {playWith == "player" && (
             <View style={styles.containButton}>
@@ -296,8 +302,11 @@ export default class PingPongScreen extends React.Component {
             <Text onPress={() => this.moveUser2('left')} style={styles.button}>{'<'}</Text>
             <Text onPress={() => this.moveUser2('right')} style={styles.button}>{'>'}</Text>
           </View>
-  
         </View>
+        <View style={{ backgroundColor: '#bbb'}}>
+          <Text style={styles.smallButton} onPress={() => this.handleChoose('go-back')}>GO BACK</Text>
+        </View>
+        </>
       )
     } else {
       return (
@@ -364,7 +373,7 @@ const styles = StyleSheet.create({
   containMenu: {
     position: 'absolute', 
     top: MAX_HEIGHT/2 - 125, 
-    right: MAX_WIDTH/2 + 125
+    left: MAX_WIDTH/2 - 80
   },
   menu: {
     position: 'absolute',
@@ -403,4 +412,3 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start'
   }
 })
-

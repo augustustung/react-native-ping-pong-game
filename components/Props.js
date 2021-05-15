@@ -1,8 +1,13 @@
-export const MAX_HEIGHT = 600, MAX_WIDTH = 400
+import { Dimensions } from 'react-native'
+
+const WIDTH = Dimensions.get('window').width
+const HEIGHT = Dimensions.get('window').height
+
+export const MAX_HEIGHT = HEIGHT*0.8, MAX_WIDTH = WIDTH*0.8
 
 export const ballProps = {
     x: MAX_HEIGHT/2 - 10,
-    y: MAX_WIDTH/2 - 10,
+    y: MAX_WIDTH/2 ,
     velocityX: 5,
     velocityY: 0,
 }
