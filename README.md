@@ -3,9 +3,11 @@ Ping Pong game in React Native without engine or library
 You can choose playing with a simple AI bot or 2 player
 
 When you clone this project: 
-    step1: open file contain, run `npm install`, then you can `npm start` as usual to start
-    step2: add package
-        expo install expo-av
+    + step1: open file contain, run `npm install`. 
+    + step2: add package `expo install expo-av`. 
+    + step3: run `npm start` and enjoy it.
+
+
 
 ![184726783_983732645787386_5608542931909286988_n](https://user-images.githubusercontent.com/79790753/118364780-1ece8300-b5c4-11eb-971f-101abdfbe118.jpg)
 
