@@ -322,7 +322,7 @@ export default class PingPongScreen extends React.Component {
             <View style={styles.menu}>
               <Text style={styles.choice1} onPress={() => this.handleChoose('hard')}>HARD</Text>
               <Text style={styles.choice1} onPress={() => this.handleChoose('medium')}>MEDIUM</Text>
-              <Text style={styles.choice1} onPress={() => this.handleChoose('easy')}>HARD</Text>
+              <Text style={styles.choice1} onPress={() => this.handleChoose('easy')}>EASY</Text>
               <Text style={styles.smallButton} onPress={() => this.setState({ direction: 'choose' })}>GO BACK</Text>
             </View>
           )}
