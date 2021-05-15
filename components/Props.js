@@ -8,16 +8,16 @@ export const ballProps = {
 }
 
 export const user1Props = {
-    x : 10,
+    x : 30,
     y : MAX_WIDTH/2 - 50
 }
 
 export const user2Props = {
-    x : MAX_HEIGHT - 40,
+    x : MAX_HEIGHT - 60,
     y : MAX_WIDTH/2 - 50
 }
 
 export const user = {
     width:  100,
-    height: 20
+    height: 30
 }
