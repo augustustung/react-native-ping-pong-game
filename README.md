@@ -4,8 +4,7 @@ You can choose playing with a simple AI bot or 2 player
 
 When you clone this project: 
     + step1: open file container, run `npm install`. 
-    + step2: add package `expo install expo-av`. 
-    + step3: run `npm start` and enjoy it.
+    + step2: run `npm start` and enjoy it.
 
 
 
