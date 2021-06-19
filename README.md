@@ -3,8 +3,8 @@ Ping Pong game in React Native without engine or library
 You can choose playing with a simple AI bot or 2 player
 
 When you clone this project: 
-    + step1: open file container, run `npm install`. 
-    + step2: run `npm start` and enjoy it.
+ - step1: open file container, run `npm install`. 
+ - step2: run `npm start` and enjoy it.
 
 
 
